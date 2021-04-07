@@ -11,12 +11,12 @@
 //     _-_-_-_-_
 //
 
-// not sure if i even used foundation but its handy to keep around
+// Necessary libraries for code to run, all pre-installed modules
 import Foundation
 import Compression
 import CoreData
 
-// gather data from the user (me), code is broken for now
+// Fixed, gather data from the user
 func gatherData() -> (String?, Int, String?) {
     var userString: String?
     var tempString: String?
@@ -29,7 +29,7 @@ func gatherData() -> (String?, Int, String?) {
     print("Page size? (defaults to 128)")
     tempString = readLine()
     
-    // optionals suck balls like what the actual fuck. why apple, why?!?!?
+    // Unwrapping some optionals and setting defaults
     if tempString != nil {
         pageSize = Int(tempString!) ?? 128
     } else if tempString == nil {
@@ -43,13 +43,13 @@ func gatherData() -> (String?, Int, String?) {
 }
 
 
-// don't forget to work on this bit, good luck parsing lzfse data from file as utf8
+// Defining variables and executing the gatherData() function
 let userData = gatherData()
 let sourceData = userData.0!.data(using: .utf8)
 let pageSize = userData.1
 let outputFile = userData.2
 
-// this code is gold, works flawlessly
+// Modified example code for data compression
 func compressData(uncompressedData: Data?, pageSize: Int) -> Data {
     var compressedData = Data()
     do {
@@ -80,7 +80,7 @@ func compressData(uncompressedData: Data?, pageSize: Int) -> Data {
     return compressedData
 }
 
-// work good for writing compressed data, not so much raw strings
+// Writes compressed data to a file specified by the user
 func writeData(dataToWrite: Data, outputFile: String?) {
     let fileURL = NSURL(fileURLWithPath: outputFile!)
     
